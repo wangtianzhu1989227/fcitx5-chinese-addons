@@ -1106,8 +1106,9 @@ bool PinyinEngine::handleCandidateList(KeyEvent &event) {
         return false;
     }
     int idx = event.key().keyListIndex(selectionKeys_);
-    if (idx == -1 && *config_.useKeypadAsSelectionKey) {
-        idx = event.key().keyListIndex(numpadSelectionKeys_);
+    if (idx == -1 && (event.key().check(FcitxKey_space) ||
+        event.key().check(FcitxKey_KP_Space))) {
+        idx = 0;
     }
     if (idx >= 0) {
         event.filterAndAccept();
